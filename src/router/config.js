@@ -1,5 +1,5 @@
 
-import Home from '../views/Home.tsx';
+import Home from '../views/Home';
 
 export const routerConfig = [
     {

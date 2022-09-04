@@ -1,4 +1,4 @@
-import * as types from '../actionTypes';
+import * as types from '../actionTypes.ts';
 
 const initUserInfo = {
     data: [{
@@ -25,8 +25,9 @@ const initUserInfo = {
         title:'任务名称4',
         content:'任务内容5',
         gmt_expire:'2022-09-01',
+        
         status:0,
-        id:4
+        id:4,
     },
     {
         title:'任务名称5',
@@ -46,7 +47,7 @@ const initUserInfo = {
     isLogined: false
 }
 
-export default function user(state = initUserInfo, action) {
+export const user = (state = initUserInfo, action) => {
 
     switch (action.type) {
         case types.ADD_LIST_DATA:

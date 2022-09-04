@@ -28,7 +28,7 @@ const addCustomize = () => (config) => {
   }
 
   if (config.resolve) {
-    config.resolve.extensions = ['.js', '.tsx', '.less', '.css'];
+    config.resolve.extensions = ['.js', 'ts', '.tsx', '.less', '.css'];
   }
 
   // 添加js、css打包gzip配置

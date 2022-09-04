@@ -2,7 +2,7 @@
 import { createStore, applyMiddleware } from 'redux';
 // 引入thunk中间件，实现异步action、打印日志、错误报告等功能，放入applyMiddleware方法之中
 import thunk from 'redux-thunk';
-import reducer from './reducers';
+import reducer from './reducers/index.ts';
 
 // 引入redux-persist库，全局数据持久化存储
 import { persistStore, persistReducer } from 'redux-persist';

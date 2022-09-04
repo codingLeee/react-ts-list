@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import DocumentTitle from 'react-document-title';
-import { Drawer, Button, Table, Space, message, Select, Form, Input, DatePicker } from 'antd';
+import { Drawer, Button, Table, Space, message, Select, Form, Input, DatePicker,Card  } from 'antd';
 import { PlusOutlined  } from '@ant-design/icons';
 import { ColumnsType } from 'antd/es/table';
 import moment from 'moment';
@@ -94,7 +94,6 @@ const AddEditTaskForm: React.FC<IProps> = ({
         <Drawer
             forceRender
             title={ title }
-            width={ 600 }
             onClose={ onClose }
             visible={ visible }
             bodyStyle={{ paddingBottom: 80 }}
@@ -197,7 +196,6 @@ class Home extends React.Component<any, IState> {
                 {
                     title: '操作',
                     key: 'action',
-                    width: 300,
                     align: 'center',
                     render: (text: any, record: any, index: number) => (
                         <Space size="middle">
@@ -352,22 +350,35 @@ class Home extends React.Component<any, IState> {
 
                     <div className="content clearfix">
                         <div className="list">
-                            <h2>李杰的测试题</h2>
+                            <h2 className="list-title">李杰的测试题</h2>
                             <div className="list-right">
                                 <Space size="middle">
                                     <Button type="primary" size="large" onClick={ this.addTask }><PlusOutlined /> 添加任务</Button>
                                 </Space>
                             </div>
                         </div>
-                        
-                        <Table 
-                            bordered
-                            rowKey={ record => record.id  } 
-                            dataSource={ list } 
-                            columns={ columns }
-                            loading={ loading }
-                            pagination={ false } 
-                        />
+                        <div className='pc'>
+                            <Table 
+                                bordered
+                                rowKey={ record => record.id  } 
+                                dataSource={ list } 
+                                columns={ columns }
+                                loading={ loading }
+                                pagination={ false } 
+                            />
+                        </div>
+                        <div className='mobile'>
+                            {list.map((item, index) => {
+                                return (
+                                    <Card title={item.title} bordered={false}>
+                                        <p>任务内容：{item.content}<Button style={{float:'right' }} onClick={ () => this.editTask(item, index) }>编辑</Button></p>
+                                        <p>截止日期：{item.gmt_expire}</p>
+                                        <p>任务状态：{ item.status === 0 ? '待办' : item.status === 1 ? '完成' : '删除'} <Button style={{float:'right' }} danger onClick={ () => this.removeTask(item.id) }>删除</Button></p>
+                                    </Card>
+                                    );
+                                })
+                            }
+                        </div>
                         {/* <Pagination
                             className="pagination"
                             total={ total }
